@@ -23,19 +23,12 @@
         </a>
     </li>
 
-    <li class="nav-item {{ request()->is('admin/travel-packages*') ? ' active' : '' }} ">
-        <a class="nav-link" href="{{ route('admin.travel-packages.index') }}">
+    <li class="nav-item {{ request()->is('admin/properties*') ? ' active' : '' }} ">
+        <a class="nav-link" href="{{ route('admin.properties.index') }}">
             <i class="fas fa-fw fa-book"></i>
-            <span>Paket</span>
+            <span>Properti</span>
         </a>
     </li>
-
-    {{-- <li class="nav-item {{ request()->is('admin/cars*') ? ' active' : '' }} ">
-        <a class="nav-link" href="{{ route('admin.cars.index') }}">
-            <i class="fas fa-fw fa-car"></i>
-            <span>Car</span>
-        </a>
-    </li> --}}
 
     <li class="nav-item {{ request()->is('admin/posts*') ? ' active' : '' }} ">
         <a class="nav-link" href="{{ route('admin.posts.index') }}">

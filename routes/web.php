@@ -55,10 +55,6 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
 
-        Route::resource('travel-packages', \App\Http\Controllers\Admin\TravelPackageController::class)->except(['show']);
-        Route::get('travel-packages/datatables', [\App\Http\Controllers\Admin\TravelPackageController::class, 'datatables'])->name('travel-packages.datatables');
-        Route::resource('travel-packages.galleries', \App\Http\Controllers\Admin\GalleryController::class);
-
         Route::resource('properties', \App\Http\Controllers\Admin\PropertyController::class)->except(['show']);
         Route::get('properties/datatables', [\App\Http\Controllers\Admin\PropertyController::class, 'datatables'])->name('properties.datatables');
         Route::resource('properties.galleries', \App\Http\Controllers\Admin\GalleryController::class);

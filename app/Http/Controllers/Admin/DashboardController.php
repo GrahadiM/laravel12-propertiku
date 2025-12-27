@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\TravelPackage;
+use App\Models\Property;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +13,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $travelPackages = TravelPackage::with('galleries')->count();
+        $property = Property::with('galleries')->count();
         $posts = Post::count();
 
         // Transaction Statistics
@@ -29,17 +29,17 @@ class DashboardController extends Controller
         // Chart Data - Transaction Status Distribution
         $statusDistribution = $this->getStatusDistribution();
 
-        // Chart Data - Top Travel Packages
+        // Chart Data - Top Property Packages
         $topPackages = $this->getTopPackages();
 
         // Recent Transactions
-        $recentTransactions = Transaction::with(['user', 'travelPackage'])
+        $recentTransactions = Transaction::with(['user', 'property'])
             ->latest()
             ->take(5)
             ->get();
 
         return view('admin.dashboard.index', [
-            'travelPackages' => $travelPackages,
+            'property' => $property,
             'posts' => $posts,
             'totalTransactions' => $totalTransactions,
             'pendingTransactions' => $pendingTransactions,
@@ -124,12 +124,12 @@ class DashboardController extends Controller
     private function getTopPackages()
     {
         $topPackages = Transaction::select(
-            'travel_packages.name',
+            'properties.name',
             DB::raw('COUNT(transactions.id) as transaction_count'),
             DB::raw('SUM(CASE WHEN transactions.status = "success" THEN transactions.amount ELSE 0 END) as total_revenue')
         )
-        ->join('travel_packages', 'transactions.travel_package_id', '=', 'travel_packages.id')
-        ->groupBy('travel_packages.id', 'travel_packages.name')
+        ->join('properties', 'transactions.property_id', '=', 'properties.id')
+        ->groupBy('properties.id', 'properties.name')
         ->orderBy('transaction_count', 'desc')
         ->take(5)
         ->get();
