@@ -16,9 +16,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersSeeder::class,
             CategorySeeder::class,
-            TravelPackageSeeder::class,
-            GallerySeeder::class,
+            // PropertySeeder::class,
+            // GallerySeeder::class,
             PostSeeder::class,
+        ]);
+        \App\Models\Property::factory()->count(10)->create();
+        $this->call([
+            GallerySeeder::class,
         ]);
     }
 }

@@ -12,8 +12,8 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\PageController::class, 'home'])->name('home');
 Route::get('posts', [App\Http\Controllers\PageController::class, 'posts'])->name('posts');
 Route::get('posts/{post:slug}', [App\Http\Controllers\PageController::class, 'detailPost'])->name('posts.show');
-Route::get('paket-travel', [App\Http\Controllers\PageController::class, 'package'])->name('package');
-Route::get('detail/{travelPackage:slug}', [App\Http\Controllers\PageController::class, 'detail'])->name('detail');
+Route::get('properti', [App\Http\Controllers\PageController::class, 'property'])->name('property');
+Route::get('properti/{property:slug}', [App\Http\Controllers\PageController::class, 'detail'])->name('detail');
 
 Route::get('kontak-kami', [App\Http\Controllers\PageController::class, 'contact'])->name('contact');
 Route::get('kirim-wa', [App\Http\Controllers\PageController::class, 'getWhatsapp'])->name('getWhatsapp');
@@ -27,6 +27,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('profile/orders', [App\Http\Controllers\ProfileController::class, 'orders'])->name('profile.orders');
     Route::delete('order/{order}/cancel', [App\Http\Controllers\ProfileController::class, 'cancelOrder'])->name('order.cancel');
     Route::get('payment/check-status/{orderId}', [App\Http\Controllers\ProfileController::class, 'checkPaymentStatus'])->name('payment.check-status');
+
+    // Booking routes
+    Route::get('booking/{property:slug}', [App\Http\Controllers\PageController::class, 'order'])->name('order');
 
     // Order routes
     Route::get('order/{travelPackage:slug}', [App\Http\Controllers\PageController::class, 'order'])->name('order');
@@ -46,13 +49,20 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['middleware' => 'isAdmin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+
         Route::resource('posts', \App\Http\Controllers\Admin\PostController::class)->except(['show']);
         Route::get('posts/datatables', [App\Http\Controllers\Admin\PostController::class, 'datatables'])->name('posts.datatables');
-        Route::resource('cars', \App\Http\Controllers\Admin\CarController::class);
+
         Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+
         Route::resource('travel-packages', \App\Http\Controllers\Admin\TravelPackageController::class)->except(['show']);
         Route::get('travel-packages/datatables', [\App\Http\Controllers\Admin\TravelPackageController::class, 'datatables'])->name('travel-packages.datatables');
         Route::resource('travel-packages.galleries', \App\Http\Controllers\Admin\GalleryController::class);
+
+        Route::resource('properties', \App\Http\Controllers\Admin\PropertyController::class)->except(['show']);
+        Route::get('properties/datatables', [\App\Http\Controllers\Admin\PropertyController::class, 'datatables'])->name('properties.datatables');
+        Route::resource('properties.galleries', \App\Http\Controllers\Admin\GalleryController::class);
+
         Route::get('transactions', [\App\Http\Controllers\Admin\TransactionController::class, 'index'])->name('transactions.index');
         Route::get('transactions/datatables', [\App\Http\Controllers\Admin\TransactionController::class, 'datatables'])->name('transactions.datatables');
         Route::get('transactions/statistics', [\App\Http\Controllers\Admin\TransactionController::class, 'statistics'])->name('transactions.statistics');

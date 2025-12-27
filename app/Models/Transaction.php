@@ -11,8 +11,7 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id',
-        'travel_package_id',
-        'transaction_id',
+        'property_id',
         'order_id',
         'amount',
         'payment_type',
@@ -30,9 +29,9 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function travelPackage()
+    public function property()
     {
-        return $this->belongsTo(TravelPackage::class);
+        return $this->belongsTo(Property::class);
     }
 
     public function isPending()

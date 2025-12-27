@@ -7,7 +7,7 @@ use App\Models\Category;
 use Illuminate\View\View;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use App\Models\TravelPackage;
+use App\Models\Property;
 use App\Mail\StoreContactMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +17,7 @@ class PageController extends Controller
 {
     public function home() : View
     {
-        $categories = Category::with('travel_packages')->get();
+        $categories = Category::with('properties')->get();
         $posts = Post::get();
         // dd($categories, $posts);
 
@@ -27,77 +27,19 @@ class PageController extends Controller
         ]);
     }
 
-    public function detail(TravelPackage $travelPackage) : View
+    public function detail(Property $property) : View
     {
         return view('detail', [
-            'travelPackage' => $travelPackage
+            'property' => $property
         ]);
     }
 
-    // public function order(TravelPackage $travelPackage, Request $request) : View
-    // {
-    //     // Set your Merchant Server Key
-    //     \Midtrans\Config::$serverKey = 'SB-Mid-server-wbmWfkTrpDPtKkWkaEdEZHMm';
-    //     // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-    //     \Midtrans\Config::$isProduction = false;
-    //     // Set sanitization on (default)
-    //     \Midtrans\Config::$isSanitized = true;
-    //     // Set 3DS transaction for credit card to true
-    //     \Midtrans\Config::$is3ds = true;
-
-    //     $params = array(
-    //         'transaction_details' => array(
-    //             'order_id' => rand(),
-    //             'gross_amount' => $travelPackage->price,
-    //         ),
-    //         'customer_details' => array(
-    //             'first_name' => auth()->user()->name,
-    //             'last_name' => '',
-    //             'email' => auth()->user()->email,
-    //             'phone' => '',
-    //         ),
-    //         'callbacks' => array(
-    //             'finish' => 'http://127.0.0.1:8000/'
-    //         ),
-    //         'enabled_payments' => array(
-    //             'credit_card',
-    //             'gopay',
-    //             'shopeepay',
-    //             'permata_va',
-    //             'bca_va',
-    //             'bni_va',
-    //             'bri_va',
-    //             'echannel',
-    //             'other_va',
-    //             'danamon_online',
-    //             'mandiri_clickpay',
-    //             'cimb_clicks',
-    //             'bca_klikbca',
-    //             'bca_klikpay',
-    //             'bri_epay',
-    //             'xl_tunai',
-    //             'indosat_dompetku',
-    //             'kioson',
-    //             'Indomaret',
-    //             'alfamart',
-    //             'akulaku'
-    //         ),
-    //     );
-
-    //     $snapToken = \Midtrans\Snap::getSnapToken($params);
-    //     // dd($params);
-
-    //     return view('order', ['snap_token'=>$snapToken], [
-    //         'travelPackage' => $travelPackage
-    //     ]);
-    // }
-
-    public function package()
+    public function property()
     {
-        $travelPackages = TravelPackage::with('galleries')->get();
+        $properties = Property::with('galleries')->get();
 
-        return view('package', [
-            'travelPackages' => $travelPackages
+        return view('property', [
+            'properties' => $properties
         ]);
     }
 
@@ -145,12 +87,11 @@ class PageController extends Controller
         return back()->with('message', 'Terimakasih atas feedbacknya! kami akan membacanya sesegera mungkin');
     }
 
-    public function order(TravelPackage $travelPackage, Request $request)
+    public function order(Property $property, Request $request)
     {
-        // Generate unique order ID
-        $orderId = 'TRV-' . date('Ymd') . '-' . rand(1000, 9999);
+        // Generate unique order ID untuk Properti
+        $orderId = 'PRP-' . date('Ymd') . '-' . rand(1000, 9999);
 
-        // Set Midtrans configuration
         \Midtrans\Config::$serverKey = config('services.midtrans.server_key');
         \Midtrans\Config::$isProduction = config('services.midtrans.is_production');
         \Midtrans\Config::$isSanitized = true;
@@ -159,20 +100,20 @@ class PageController extends Controller
         $params = [
             'transaction_details' => [
                 'order_id' => $orderId,
-                'gross_amount' => $travelPackage->price,
+                'gross_amount' => $property->price,
             ],
             'customer_details' => [
                 'first_name' => auth()->user()->name,
                 'email' => auth()->user()->email,
-                'phone' => auth()->user()->phone ?? '085767113554',
+                'phone' => auth()->user()->phone ?? '08xxxxxxxxxx',
             ],
             'item_details' => [
                 [
-                    'id' => $travelPackage->id,
-                    'price' => $travelPackage->price,
+                    'id' => $property->id,
+                    'price' => $property->price,
                     'quantity' => 1,
-                    'name' => $travelPackage->name,
-                    'category' => $travelPackage->category->title ?? 'Travel Package',
+                    'name' => $property->name,
+                    'category' => $property->category->title ?? 'Property Unit',
                 ]
             ],
             'callbacks' => [
@@ -180,53 +121,30 @@ class PageController extends Controller
                 'error' => route('payment.error'),
                 'pending' => route('payment.pending'),
             ],
-            'enabled_payments' => [
-                'credit_card',
-                'gopay',
-                'shopeepay',
-                'permata_va',
-                'bca_va',
-                'bni_va',
-                'bri_va',
-                'echannel',
-                'other_va',
-                'danamon_online',
-                'mandiri_clickpay',
-                'cimb_clicks',
-                'bca_klikbca',
-                'bca_klikpay',
-                'bri_epay',
-                'xl_tunai',
-                'indosat_dompetku',
-                'kioson',
-                'indomaret',
-                'alfamart',
-                'akulaku'
-            ],
+            'enabled_payments' => ['credit_card', 'gopay', 'shopeepay', 'bca_va', 'bni_va', 'bri_va', 'indomaret', 'alfamart'],
         ];
 
         try {
             $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-            // Save transaction to database
             $transaction = Transaction::create([
                 'user_id' => auth()->id(),
-                'travel_package_id' => $travelPackage->id,
+                'property_id' => $property->id, // Sesuaikan foreign key di tabel transaksi
                 'order_id' => $orderId,
                 'transaction_id' => $orderId,
-                'amount' => $travelPackage->price,
+                'amount' => $property->price,
                 'status' => 'pending',
                 'snap_token' => $snapToken,
             ]);
 
             return view('order', [
                 'snap_token' => $snapToken,
-                'travelPackage' => $travelPackage,
+                'property' => $property,
                 'transaction' => $transaction
             ]);
 
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Payment gateway error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Gagal memproses pembayaran: ' . $e->getMessage());
         }
     }
 

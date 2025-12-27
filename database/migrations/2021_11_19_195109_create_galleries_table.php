@@ -15,7 +15,7 @@ class CreateGalleriesTable extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('travel_package_id')->constrained();
+            $table->foreignId('property_id')->constrained()->onDelete('cascade');
             $table->text('path');
             $table->timestamps();
         });

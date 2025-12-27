@@ -13,20 +13,14 @@ class GallerySeeder extends Seeder
      */
     public function run(): void
     {
-        $galleries = [];
+        $galleries = \App\Models\Property::all();
 
         // Untuk setiap travel package (1-9), tambahkan 2-3 gambar
-        for ($i = 1; $i <= 9; $i++) {
-            $galleries = array_merge($galleries, [
-                [
-                    'travel_package_id' => $i,
-                    'path' => 'assets/gallery/package' . $i . '.png',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
+        foreach ($galleries as $property) {
+            \App\Models\Gallery::create([
+                'property_id' => $property->id,
+                'path' => 'assets/gallery/property-default.png',
             ]);
         }
-
-        DB::table('galleries')->insert($galleries);
     }
 }

@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategorySeeder extends Seeder
 {
@@ -14,24 +15,10 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = [
-            [
-                'title' => 'Wisata Alam',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'title' => 'Wisata Kuliner',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'title' => 'Wisata Budaya & Sejarah',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ];
+        $categories = ['Rumah Tinggal', 'Apartemen', 'Ruko & Komersial'];
 
-        DB::table('categories')->insert($categories);
+        foreach ($categories as $cat) {
+            Category::create(['title' => $cat]);
+        }
     }
 }
