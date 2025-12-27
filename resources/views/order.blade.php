@@ -41,15 +41,15 @@
                             <strong>Email:</strong> {{ auth()->user()->email }}
                         </div>
                         <div class="alert alert-secondary" style="background-color: #f5f5f5; border: 1px solid #f5f5f5" role="alert">
-                            <strong>Paket Travel:</strong> {{ $travelPackage->name }}
+                            <strong>Paket Travel:</strong> {{ $property->name }}
                         </div>
                         <div class="alert alert-secondary" style="background-color: #f5f5f5; border: 1px solid #f5f5f5" role="alert">
-                            <strong>Duration:</strong> {{ $travelPackage->duration }}
+                            <strong>Duration:</strong> {{ $property->duration }}
                         </div>
                         <div class="alert alert-secondary" style="background-color: #f5f5f5; border: 1px solid #f5f5f5" role="alert">
                             <strong>Harga:</strong>
                             <span class="text-gray-500 font-weight-light">
-                                {{ 'Rp ' . number_format($travelPackage->price, 0, ',', '.') }}
+                                {{ 'Rp ' . number_format($property->price, 0, ',', '.') }}
                             </span>
                         </div>
                         <div class="alert alert-secondary" style="background-color: #f5f5f5; border: 1px solid #f5f5f5" role="alert">
@@ -64,33 +64,6 @@
                         <a href="{{ route('profile.orders') }}" class="btn btn-primary btn-md btn-block mt-2" id="manual-redirect">
                             <i class="fa fa-history"></i> Lihat Riwayat Order Sekarang
                         </a>
-
-                        <div class="text-center mt-3">
-                            <small class="text-muted">
-                                Pilih metode pembayaran yang tersedia
-                            </small>
-                        </div>
-
-                        <div class="mt-4">
-                            <h6>Metode Pembayaran yang Tersedia:</h6>
-                            <div class="row">
-                                <div class="col-6 col-md-4 mb-2">
-                                    <span class="badge badge-success">Credit Card</span>
-                                </div>
-                                <div class="col-6 col-md-4 mb-2">
-                                    <span class="badge badge-info">GoPay</span>
-                                </div>
-                                <div class="col-6 col-md-4 mb-2">
-                                    <span class="badge badge-warning">ShopeePay</span>
-                                </div>
-                                <div class="col-6 col-md-4 mb-2">
-                                    <span class="badge badge-primary">Bank Transfer</span>
-                                </div>
-                                <div class="col-6 col-md-4 mb-2">
-                                    <span class="badge badge-secondary">Alfamart/Indomaret</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

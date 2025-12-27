@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('booking/{property:slug}', [App\Http\Controllers\PageController::class, 'order'])->name('order');
 
     // Order routes
-    Route::get('order/{travelPackage:slug}', [App\Http\Controllers\PageController::class, 'order'])->name('order');
+    Route::get('order/{property:slug}', [App\Http\Controllers\PageController::class, 'order'])->name('order');
 
     // Payment callback routes - GET untuk Midtrans
     Route::get('payment/finish', [App\Http\Controllers\PageController::class, 'paymentFinish'])->name('payment.finish');

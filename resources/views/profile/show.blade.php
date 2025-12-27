@@ -122,7 +122,7 @@
                                     @foreach($recentOrders as $order)
                                     <tr>
                                         <td>{{ $order->order_id }}</td>
-                                        <td>{{ $order->travelPackage->name }}</td>
+                                        <td>{{ $order->property->name }}</td>
                                         <td>Rp {{ number_format($order->amount, 0, ',', '.') }}</td>
                                         <td>
                                             <span class="badge

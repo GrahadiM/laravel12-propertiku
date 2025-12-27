@@ -34,12 +34,25 @@ class PageController extends Controller
         ]);
     }
 
-    public function property()
+    public function property(Request $request)
     {
-        $properties = Property::with('galleries')->get();
+        $categories = Category::all();
+
+        // Mulai query properti
+        $query = Property::with(['galleries', 'category']);
+
+        // Jika ada filter kategori yang dipilih
+        if ($request->has('category') && $request->category != '') {
+            $query->whereHas('category', function($q) use ($request) {
+                $q->where('title', $request->category);
+            });
+        }
+
+        $properties = $query->get();
 
         return view('property', [
-            'properties' => $properties
+            'properties' => $properties,
+            'categories' => $categories
         ]);
     }
 

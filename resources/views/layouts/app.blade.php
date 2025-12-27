@@ -27,7 +27,7 @@
 
     @include('partials.footer')
 
-    <script src="{{ asset('frontend/assets/libraries/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/libraries/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
     @stack('script-alt')
 </body>

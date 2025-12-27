@@ -94,13 +94,13 @@
                                                     <td><strong>{{ $order->order_id }}</strong></td>
                                                     <td>
                                                         <div>
-                                                            <strong>{{ $order->travelPackage->name }}</strong>
+                                                            <strong>{{ $order->property->name }}</strong>
                                                             <br>
                                                             <small
-                                                                class="text-muted">{{ $order->travelPackage->duration }}</small>
+                                                                class="text-muted">{{ $order->property->duration }}</small>
                                                         </div>
                                                     </td>
-                                                    <td>{{ $order->travelPackage->location }}</td>
+                                                    <td>{{ $order->property->location }}</td>
                                                     <td>Rp {{ number_format($order->amount, 0, ',', '.') }}</td>
                                                     <td>
                                                         <span
@@ -121,7 +121,7 @@
                                                                 <span class="btn btn-success btn-sm disabled">
                                                                     <i class="bx bx-check-circle"></i> Selesai
                                                                 </span>
-                                                                <a href="{{ route('detail', $order->travelPackage->slug) }}"
+                                                                <a href="{{ route('detail', $order->property->slug) }}"
                                                                     class="btn btn-info btn-sm mt-1">
                                                                     <i class="bx bx-shopping-bag"></i> Order Lagi
                                                                 </a>
@@ -131,7 +131,7 @@
                                                                     class="btn btn-primary btn-sm pay-button"
                                                                     data-order-id="{{ $order->order_id }}"
                                                                     data-snap-token="{{ $order->snap_token }}"
-                                                                    data-package-name="{{ $order->travelPackage->name }}">
+                                                                    data-package-name="{{ $order->property->name }}">
                                                                     <i class="bx bx-credit-card"></i> Bayar Sekarang
                                                                 </button>
                                                                 <!-- Button Cek Status -->
@@ -153,16 +153,16 @@
                                                                 </form>
                                                             @elseif($order->status == 'failed' || $order->status == 'expire' || $order->status == 'cancel')
                                                                 <!-- Button Order Ulang untuk status failed/expire/cancel -->
-                                                                <a href="{{ route('order', $order->travelPackage->slug) }}"
+                                                                <a href="{{ route('order', $order->property->slug) }}"
                                                                     class="btn btn-info btn-sm">
                                                                     <i class="bx bx-rotate-left"></i> Order Ulang
                                                                 </a>
-                                                                <a href="{{ route('detail', $order->travelPackage->slug) }}"
+                                                                <a href="{{ route('detail', $order->property->slug) }}"
                                                                     class="btn btn-secondary btn-sm mt-1">
                                                                     <i class="bx bx-detail"></i> Lihat Detail
                                                                 </a>
                                                             @else
-                                                                <a href="{{ route('detail', $order->travelPackage->slug) }}"
+                                                                <a href="{{ route('detail', $order->property->slug) }}"
                                                                     class="btn btn-info btn-sm">
                                                                     Order Lagi
                                                                 </a>

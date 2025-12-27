@@ -15,7 +15,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $recentOrders = Transaction::where('user_id', $user->id)
-            ->with('travelPackage')
+            ->with('property')
             ->latest()
             ->take(5)
             ->get();
@@ -59,7 +59,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $orders = Transaction::where('user_id', $user->id)
-            ->with('travelPackage')
+            ->with('property')
             ->latest()
             ->paginate(10);
 
