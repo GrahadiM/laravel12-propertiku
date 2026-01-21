@@ -21,7 +21,7 @@ class GalleryController extends Controller
 
         $property->galleries()->create($data);
 
-        return redirect()->route('admin.travel-packages.edit', $property)->with('message', 'Added Successfully !');
+        return redirect()->route('admin.properties.edit', $property)->with('message', 'Added Successfully !');
     }
 
     public function edit( Property $property, Gallery $gallery): View
@@ -44,7 +44,7 @@ class GalleryController extends Controller
         );
         $gallery->update($data);
 
-        return redirect()->route('admin.travel-packages.edit', $property)->with('message', 'Updated Successfully !');
+        return redirect()->route('admin.properties.edit', $property)->with('message', 'Updated Successfully !');
     }
 
     public function destroy( Property $property, Gallery $gallery): RedirectResponse
@@ -55,6 +55,6 @@ class GalleryController extends Controller
 
         $gallery->delete();
 
-        return redirect()->route('admin.travel-packages.edit', $property)->with('message', 'Deleted Successfully !');
+        return redirect()->route('admin.properties.edit', $property)->with('message', 'Deleted Successfully !');
     }
 }
