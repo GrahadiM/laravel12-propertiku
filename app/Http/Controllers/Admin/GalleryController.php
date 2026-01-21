@@ -3,36 +3,36 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Gallery;
-use App\Models\TravelPackage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreGalleryRequest;
+use App\Models\Property;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class GalleryController extends Controller
 {
-    public function store(StoreGalleryRequest $request, TravelPackage $travelPackage): RedirectResponse
+    public function store(StoreGalleryRequest $request, Property $property): RedirectResponse
     {
         $data = $request->all();
         $data['path'] = $request->file('path')->store(
             'assets/gallery', 'public'
         );
 
-        $travelPackage->galleries()->create($data);
+        $property->galleries()->create($data);
 
-        return redirect()->route('admin.travel-packages.edit', $travelPackage)->with('message', 'Added Successfully !');
+        return redirect()->route('admin.travel-packages.edit', $property)->with('message', 'Added Successfully !');
     }
 
-    public function edit( TravelPackage $travelPackage, Gallery $gallery): View
+    public function edit( Property $property, Gallery $gallery): View
     {
         return view('admin.galleries.edit', [
-            'travelPackage' => $travelPackage,
+            'travelPackage' => $property,
             'gallery' => $gallery
         ]);
     }
 
-    public function update(StoreGalleryRequest $request, TravelPackage $travelPackage, Gallery $gallery): RedirectResponse
+    public function update(StoreGalleryRequest $request, Property $property, Gallery $gallery): RedirectResponse
     {
         if($request->path){
             File::delete('storage/' . $gallery->path);
@@ -44,10 +44,10 @@ class GalleryController extends Controller
         );
         $gallery->update($data);
 
-        return redirect()->route('admin.travel-packages.edit', $travelPackage)->with('message', 'Updated Successfully !');
+        return redirect()->route('admin.travel-packages.edit', $property)->with('message', 'Updated Successfully !');
     }
 
-    public function destroy( TravelPackage $travelPackage, Gallery $gallery): RedirectResponse
+    public function destroy( Property $property, Gallery $gallery): RedirectResponse
     {
         if($gallery->path){
             File::delete('storage/' . $gallery->path);
@@ -55,6 +55,6 @@ class GalleryController extends Controller
 
         $gallery->delete();
 
-        return redirect()->route('admin.travel-packages.edit', $travelPackage)->with('message', 'Deleted Successfully !');
+        return redirect()->route('admin.travel-packages.edit', $property)->with('message', 'Deleted Successfully !');
     }
 }
