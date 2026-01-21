@@ -3,7 +3,7 @@
 @section('content')
     <main>
         <section class="hero" id="hero"
-            style="background-image: url('{{ asset('frontend/assets/images/hero-property.png') }}'); background-repeat: no-repeat; background-size: cover; height: 100vh;">
+            style="background-image: url('{{ asset('frontend/assets/images/alhamraresto-banner.jpg') }}'); background-repeat: no-repeat; background-size: cover; height: 100vh;">
             <div class="hero-content h-100 d-flex justify-content-center align-items-center flex-column">
                 <h1 class="text-center text-white display-4">
                     Temukan Hunian Impian Anda

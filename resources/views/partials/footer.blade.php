@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-4 text-center text-sm-start mb-3">
                 <a href="{{ route('home') }}">
-                    <img width="250" style="height: 120px; object-fit: cover" src="{{ asset('frontend/assets/images/icon_web.png') }}" alt="logo" />
+                    <img width="250" style="height: 120px; object-fit: cover" src="{{ asset('frontend/assets/images/alhamraresto-logo.png') }}" alt="logo" />
                 </a>
                 <p class="title-alt mt-4">
                     <strong>{{ config('app.name', 'Studio Naadi - Hunian Impian Anda') }}</strong>: Temukan hunian impian dan investasi properti terbaik. Keamanan transaksi dan kenyamanan hunian adalah prioritas kami.

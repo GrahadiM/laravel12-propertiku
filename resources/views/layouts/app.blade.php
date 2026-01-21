@@ -10,7 +10,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Studio Naadi - Hunian Impian Anda') }}</title>
+    <title>{{ config('app.name', 'Alhamraresto') }}</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
 
