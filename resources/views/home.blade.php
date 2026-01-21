@@ -6,15 +6,15 @@
             style="background-image: url('{{ asset('frontend/assets/images/alhamraresto-banner.jpg') }}'); background-repeat: no-repeat; background-size: cover; height: 100vh;">
             <div class="hero-content h-100 d-flex justify-content-center align-items-center flex-column">
                 <h1 class="text-center text-white display-4">
-                    Temukan Hunian Impian Anda
+                    Al Hamra Restaurant - Temukan Makanan Impian Anda
                 </h1>
-                <p class="text-white">Properti Terbaik di Lokasi Strategis</p>
-                <a href="#property" class="btn btn-hero mt-5">Lihat Properti</a>
+                <p class="text-white">Makanan Terbaik di Lokasi Strategis</p>
+                <a href="#property" class="btn btn-hero mt-5">Lihat Makanan</a>
             </div>
         </section>
 
         <section class="container why-us text-center">
-            <h2 class="section-title">Kenapa Memilih Properti Kami</h2>
+            <h2 class="section-title">Kenapa Memilih Al Hamra Restaurant</h2>
             <hr width="40" class="text-center" />
             <div class="row mt-5">
                 <div class="col-lg-4 mb-3">

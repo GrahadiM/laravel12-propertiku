@@ -16,7 +16,7 @@
                 <li class="nav__item">
                     <a href="{{ route('property') }}" class="nav__link {{ request()->is('properti*') ? ' active-link' : '' }}">
                         <i class="bx bx-building-house nav__icon"></i>
-                        <span class="nav__name">Properti</span>
+                        <span class="nav__name">Menu</span>
                     </a>
                 </li>
 
