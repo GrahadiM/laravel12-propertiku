@@ -1,7 +1,7 @@
 <header class="header" id="header">
     <nav class="nav container">
         <a href="{{ route('home') }}" class="nav__logo">
-            <img width="250" style="height: 70px; object-fit: cover" src="{{ asset('frontend/assets/images/alhamraresto-logo.png') }}" alt="logo" />
+            <img width="100" style="height: 50px; object-fit: cover" src="{{ asset('frontend/assets/images/alhamraresto-logo.png') }}" alt="logo" />
         </a>
 
         <div class="nav__menu" id="nav-menu">
